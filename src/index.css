@@ -1,42 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* 100:1 Design System - Cores baseadas no briefing */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Cores principais da marca 100:1 */
+    --background: 179 49% 12%; /* #123332 - Verde Marinho Muito Escuro */
+    --foreground: 33 84% 94%; /* #F9EEE7 - Branco Sujo/Creme */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 179 48% 14%; /* Ligeiramente mais claro que o background */
+    --card-foreground: 33 84% 94%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 179 49% 12%;
+    --popover-foreground: 33 84% 94%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 179 51% 20%; /* #1D4241 - Verde Escuro Principal */
+    --primary-foreground: 33 84% 94%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 179 48% 14%;
+    --secondary-foreground: 33 84% 94%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 179 48% 16%;
+    --muted-foreground: 33 47% 75%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 15 73% 72%; /* #EF9C82 - Laranja/Salmão para destaques */
+    --accent-foreground: 179 49% 12%;
+
+    --title: 33 100% 87%; /* #FFD9BE - Bege para títulos */
+    --title-foreground: 179 49% 12%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 33 84% 94%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 179 48% 18%;
+    --input: 179 48% 16%;
+    --ring: 15 73% 72%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Gradientes e efeitos */
+    --gradient-hero: linear-gradient(135deg, hsl(179 51% 20%), hsl(179 49% 12%));
+    --gradient-accent: linear-gradient(135deg, hsl(15 73% 72%), hsl(15 73% 82%));
+    --shadow-elegant: 0 10px 30px -10px hsl(179 49% 8% / 0.3);
+    --shadow-glow: 0 0 40px hsl(15 73% 72% / 0.2);
+
+    /* Animações */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +114,70 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-work-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat;
+  }
+}
+
+@layer components {
+  /* Componente Hero personalizado */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .accent-gradient {
+    background: var(--gradient-accent);
+  }
+
+  .text-title {
+    color: hsl(var(--title));
+  }
+
+  .bg-title {
+    background-color: hsl(var(--title));
+  }
+
+  /* Efeitos de hover e animações */
+  .hover-glow {
+    transition: var(--transition-smooth);
+  }
+
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+  }
+
+  .bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Efeito de fade in para elementos */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
