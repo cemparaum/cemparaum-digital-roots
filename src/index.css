@@ -180,4 +180,33 @@
       transform: translateY(0);
     }
   }
+
+  /* Animações do indicador de scroll */
+  .scroll-indicator {
+    animation: scrollFloat 3s ease-in-out infinite;
+  }
+
+  .scroll-dot {
+    animation: scrollDot 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollFloat {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-8px);
+    }
+  }
+
+  @keyframes scrollDot {
+    0%, 100% {
+      opacity: 0.4;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(8px);
+    }
+  }
 }
