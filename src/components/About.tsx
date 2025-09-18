@@ -35,8 +35,9 @@ const About = () => {
             <div className="relative overflow-hidden rounded-2xl">
               <img 
                 src={teamImage} 
-                alt="Equipe 100:1 trabalhando em colaboração" 
+                alt="Equipe da 100:1 Agência Digital em Serra ES - Especialistas em criação de sites, SEO e Google Meu Negócio para empreendedores do Espírito Santo" 
                 className="w-full h-96 object-cover"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
             </div>
@@ -52,15 +53,15 @@ const About = () => {
           <div className="space-y-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-title mb-4">
-                Conheça a 100:1
+                Conheça a 100:1 - Agência Digital em Serra ES
               </h2>
               <div className="w-16 h-1 bg-accent rounded-full mb-6"></div>
               
               <p className="text-lg text-foreground/90 mb-8 font-work-sans leading-relaxed">
-                Nascemos para te ajudar. Somos a <span className="text-accent font-semibold">100:1</span>, uma agência de marketing digital 
+                Nascemos para te ajudar. Somos a <span className="text-accent font-semibold">100:1</span>, uma <strong>agência de marketing digital em Serra ES</strong> 
                 que acredita que a digitalização deve ser para todos. Nossa missão é 
                 <span className="text-title font-medium"> plantar, colher e semear</span> junto 
-                com você, oferecendo as ferramentas e o suporte necessários para que sua marca floresça no mundo online.
+                com você, oferecendo <strong>criação de sites, SEO e consultoria digital</strong> para que sua marca floresça no mundo online.
               </p>
               
               <div className="flex justify-center mt-8">

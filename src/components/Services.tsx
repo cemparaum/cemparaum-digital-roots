@@ -63,12 +63,12 @@ const Services = () => {
         {/* Header da seção */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-title mb-4">
-            Nossos Serviços
+            Serviços de Marketing Digital em Serra ES
           </h2>
           <div className="w-16 h-1 bg-accent rounded-full mx-auto mb-6"></div>
           <p className="text-xl text-foreground/90 max-w-3xl mx-auto font-work-sans">
-            Soluções completas de marketing digital pensadas para 
-            <span className="text-accent font-medium">o crescimento do seu negócio.</span>
+            Soluções completas de <strong>criação de sites, SEO e Google Meu Negócio</strong> pensadas para 
+            <span className="text-accent font-medium">pequenos empreendedores do Espírito Santo.</span>
           </p>
         </div>
 
@@ -121,8 +121,9 @@ const Services = () => {
           <div className="absolute inset-0 opacity-20">
             <img 
               src={servicesImage} 
-              alt="Serviços digitais da 100:1" 
+              alt="Serviços de marketing digital da 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio para empreendedores" 
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
 

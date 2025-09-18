@@ -12,8 +12,10 @@ const Hero = () => {
       <div className="absolute inset-0">
         <img 
           src={heroImage} 
-          alt="Workspace digital moderno da 100:1" 
+          alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio para pequenos empreendedores no Espírito Santo" 
           className="w-full h-full object-cover opacity-20"
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/40"></div>
       </div>
@@ -29,13 +31,13 @@ const Hero = () => {
 
           {/* Título principal */}
           <h1 className="text-5xl md:text-7xl font-montserrat font-bold text-title mb-6 leading-tight">
-            Plante. Cresça.
+            Criação de Sites em Serra ES - Plante. Cresça.
             <span className="block text-accent">Colha.</span>
           </h1>
 
           {/* Subtítulo */}
           <p className="text-xl md:text-2xl text-foreground/90 mb-8 max-w-3xl mx-auto font-work-sans">
-            Transformamos pequenos empreendedores em gigantes digitais. 
+            Transformamos <strong>pequenos empreendedores do Espírito Santo</strong> em gigantes digitais com <strong>SEO, criação de sites</strong> e marketing digital. 
             <span className="text-accent font-medium">Sua jornada digital começa com uma semente de confiança.</span>
           </p>
 
