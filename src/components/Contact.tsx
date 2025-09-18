@@ -9,7 +9,8 @@ import {
   Send,
   MessageCircle,
   Instagram,
-  Linkedin
+  Linkedin,
+  ArrowRight
 } from "lucide-react";
 
 const Contact = () => {
@@ -56,9 +57,8 @@ const Contact = () => {
           </h2>
           <div className="w-16 h-1 bg-accent rounded-full mx-auto mb-6"></div>
           <p className="text-xl text-foreground/90 max-w-3xl mx-auto font-work-sans">
-            Estamos prontos para ouvir sua ideia e transformá-la em 
-            <span className="text-accent font-medium"> resultados digitais</span>. 
-            Entre em contato conosco!
+            Estamos prontos para ouvir sua ideia e transformá-la em resultados. 
+            <span className="text-accent font-medium">Entre em contato conosco!</span>
           </p>
         </div>
 
@@ -70,7 +70,7 @@ const Contact = () => {
                 Envie sua Mensagem
               </h3>
               <p className="text-foreground/80 font-work-sans">
-                Preencha o formulário abaixo e entraremos em contato em até 24 horas.
+                Preencha o formulário abaixo e nossa equipe entrará em contato.
               </p>
             </div>
 
@@ -214,11 +214,11 @@ const Contact = () => {
                 Precisa de uma resposta urgente? Chame no WhatsApp e fale diretamente conosco!
               </p>
               <Button 
-                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
                 onClick={() => window.open('https://wa.me/5527999999999?text=Olá! Gostaria de saber mais sobre os serviços da 100:1', '_blank')}
               >
-                <MessageCircle className="mr-2 w-4 h-4" />
-                Chamar no WhatsApp
+                Começar Meu Projeto
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </div>
           </div>

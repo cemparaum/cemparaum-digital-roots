@@ -73,8 +73,8 @@ const Footer = () => {
             </div>
             
             <p className="text-foreground/80 font-work-sans leading-relaxed">
-              Agência de marketing digital especializada em ajudar pequenos empreendedores 
-              a se digitalizarem de forma acessível e humana.
+              Agência de marketing digital que ajuda pequenos empreendedores a se digitalizarem 
+              de forma acessível e humana, construindo o futuro de seus negócios.
             </p>
 
             <div className="space-y-3">

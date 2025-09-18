@@ -21,7 +21,6 @@ const Services = () => {
         "Carregamento ultrarrápido",
         "SEO básico incluído"
       ],
-      price: "A partir de R$ 997"
     },
     {
       icon: Search,
@@ -32,8 +31,7 @@ const Services = () => {
         "Otimização on-page",
         "Link building estratégico",
         "Relatórios mensais"
-      ],
-      price: "A partir de R$ 497/mês"
+      ]
     },
     {
       icon: MapPin,
@@ -44,8 +42,7 @@ const Services = () => {
         "Gestão de avaliações",
         "Posts regulares",
         "Relatórios de desempenho"
-      ],
-      price: "A partir de R$ 297/mês"
+      ]
     },
     {
       icon: BarChart3,
@@ -56,8 +53,7 @@ const Services = () => {
         "Facebook Pixel",
         "Relatórios personalizados",
         "Insights estratégicos"
-      ],
-      price: "A partir de R$ 197/mês"
+      ]
     }
   ];
 
@@ -71,8 +67,8 @@ const Services = () => {
           </h2>
           <div className="w-16 h-1 bg-accent rounded-full mx-auto mb-6"></div>
           <p className="text-xl text-foreground/90 max-w-3xl mx-auto font-work-sans">
-            Soluções completas de marketing digital pensadas especialmente para 
-            <span className="text-accent font-medium"> pequenos empreendedores</span> que querem crescer online.
+            Soluções completas de marketing digital pensadas para 
+            <span className="text-accent font-medium">o crescimento do seu negócio.</span>
           </p>
         </div>
 
@@ -107,11 +103,6 @@ const Services = () => {
                 ))}
               </ul>
 
-              {/* Preço */}
-              <div className="text-accent font-bold text-lg mb-6">
-                {service.price}
-              </div>
-
               {/* Botão */}
               <Button 
                 className="w-full bg-accent/10 hover:bg-accent text-accent hover:text-accent-foreground border border-accent/20"
@@ -140,23 +131,18 @@ const Services = () => {
               Pacote Completo de Digitalização
             </h3>
             <p className="text-xl text-foreground/90 mb-8 max-w-2xl mx-auto">
-              Tenha todos os serviços integrados com desconto especial. 
-              <span className="text-accent font-semibold"> Economia de até 30%</span> contratando o pacote completo.
+              Transforme sua presença online com nossa solução completa. 
+              <span className="text-accent font-semibold">Otimize seu tempo e investimento</span> ao integrar todos os serviços que seu negócio precisa para crescer de forma sustentável.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex justify-center">
               <Button 
                 size="lg"
                 className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg hover-glow"
               >
-                Ver Pacote Completo
+                Começar Meu Projeto
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              
-              <div className="text-center sm:text-left">
-                <div className="text-2xl font-bold text-accent">R$ 1.497/mês</div>
-                <div className="text-sm text-foreground/70">Em vez de R$ 1.988/mês</div>
-              </div>
             </div>
           </div>
         </div>

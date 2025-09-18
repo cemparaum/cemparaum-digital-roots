@@ -29,14 +29,14 @@ const Hero = () => {
 
           {/* Título principal */}
           <h1 className="text-5xl md:text-7xl font-montserrat font-bold text-title mb-6 leading-tight">
-            Transformamos
-            <span className="block text-accent">Ideias em Resultados</span>
+            Plante. Cresça.
+            <span className="block text-accent">Colha.</span>
           </h1>
 
           {/* Subtítulo */}
           <p className="text-xl md:text-2xl text-foreground/90 mb-8 max-w-3xl mx-auto font-work-sans">
-            Ajudamos pequenos empreendedores a se digitalizarem de forma acessível e humana. 
-            <span className="text-accent font-medium"> Da semente ao crescimento</span>, estamos juntos nessa jornada.
+            Transformamos pequenos empreendedores em gigantes digitais. 
+            <span className="text-accent font-medium">Sua jornada digital começa com uma semente de confiança.</span>
           </p>
 
           {/* Estatísticas rápidas */}

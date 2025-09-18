@@ -1,4 +1,5 @@
-import { Heart, Target, Users, Zap } from "lucide-react";
+import { Heart, Target, Users, Zap, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import teamImage from "@/assets/team-image.jpg";
 
 const About = () => {
@@ -6,22 +7,22 @@ const About = () => {
     {
       icon: Heart,
       title: "Acolhimento",
-      description: "Tratamos cada cliente como parte da nossa família, oferecendo suporte humano e próximo."
+      description: "Tratamos cada projeto com a dedicação que ele merece, oferecendo um suporte humano e próximo."
     },
     {
       icon: Users,
-      title: "Amizade",
-      description: "Construímos relações duradouras baseadas na confiança e parceria genuína."
+      title: "Parceria",
+      description: "Queremos ser seu parceiro de crescimento. Construímos relações duradouras baseadas na confiança e na colaboração."
     },
     {
       icon: Target,
       title: "Acessibilidade",
-      description: "Soluções econômicas e eficazes que cabem no orçamento de qualquer empreendedor."
+      description: "Oferecemos soluções que cabem no seu orçamento, mostrando que é possível ter alta qualidade sem gastar muito."
     },
     {
       icon: Zap,
       title: "Inovação",
-      description: "Tecnologia de ponta com simplicidade, unindo o melhor dos dois mundos."
+      description: "Unimos o melhor da tecnologia com a simplicidade, para que você possa focar no que realmente importa: seu negócio."
     }
   ];
 
@@ -51,22 +52,33 @@ const About = () => {
           <div className="space-y-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-title mb-4">
-                Quem Somos
+                Conheça a 100:1
               </h2>
               <div className="w-16 h-1 bg-accent rounded-full mb-6"></div>
               
-              <p className="text-lg text-foreground/90 mb-6 font-work-sans leading-relaxed">
-                Somos a <span className="text-accent font-semibold">100:1</span>, uma agência de marketing digital 
-                que acredita no poder da digitalização acessível. Inspirados na parábola do semeador, 
-                nossa missão é <span className="text-title font-medium">plantar, colher e semear</span> junto 
-                com empreendedores do Espírito Santo.
+              <p className="text-lg text-foreground/90 mb-8 font-work-sans leading-relaxed">
+                Nascemos para te ajudar. Somos a <span className="text-accent font-semibold">100:1</span>, uma agência de marketing digital 
+                que acredita que a digitalização deve ser para todos. Nossa missão é 
+                <span className="text-title font-medium"> plantar, colher e semear</span> junto 
+                com você, oferecendo as ferramentas e o suporte necessários para que sua marca floresça no mundo online.
               </p>
               
-              <p className="text-lg text-foreground/80 mb-8 font-work-sans leading-relaxed">
-                Não somos apenas prestadores de serviço - somos parceiros de crescimento. 
-                Combinamos tecnologia de ponta com o calor humano, criando soluções que realmente 
-                fazem a diferença na vida dos nossos clientes.
-              </p>
+              <div className="flex justify-center mt-8">
+                <Button 
+                  size="lg" 
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg hover-glow"
+                >
+                  Começar Meu Projeto
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Título da seção de valores */}
+            <div className="mb-8">
+              <h3 className="text-3xl font-montserrat font-bold text-title mb-4">
+                Nossos Valores
+              </h3>
             </div>
 
             {/* Valores */}
