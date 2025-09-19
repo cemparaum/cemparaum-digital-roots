@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Specific search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Sitemap location
+Sitemap: https://cemparaum.com.br/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Block access to admin/sensitive areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.env
+Disallow: /config/
