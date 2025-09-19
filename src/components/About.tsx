@@ -66,7 +66,7 @@ const About = () => {
               
               <p className="text-lg text-foreground/90 mb-8 font-work-sans leading-relaxed">
                 Nascemos para te ajudar. Somos a <span className="text-accent font-semibold">100:1</span>, uma <strong>agência de marketing digital em Serra ES</strong> 
-                que acredita que a digitalização deve ser para todos. Nossa missão é 
+                 que acredita que a digitalização deve ser para todos. Nossa missão é 
                 <span className="text-title font-medium"> plantar, colher e semear</span> junto 
                 com você, oferecendo <a href="#servicos" className="text-accent font-medium hover:underline"><strong>criação de sites, SEO e consultoria digital</strong></a> para que sua marca floresça no mundo online.
               </p>

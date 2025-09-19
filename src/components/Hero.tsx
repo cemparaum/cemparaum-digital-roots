@@ -59,8 +59,12 @@ const Hero = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-extrabold leading-none bg-gradient-to-b from-title to-accent text-transparent bg-clip-text drop-shadow-md">
-            Criação de Sites e SEO no Espírito Santo
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-extrabold leading-tight bg-gradient-to-b from-title to-accent text-transparent bg-clip-text drop-shadow-md">
+            Plante.
+            <br />
+            Cresça.
+            <br />
+            Colha.
           </h1>
           <div className="w-20 h-1 bg-accent rounded-full mx-auto"></div>
 
