@@ -29,12 +29,12 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Telefone & WhatsApp",
-      info: "(27) 9 9999-9999",
+      info: "(27) 99527-1995",
     },
     {
       icon: Mail,
       title: "E-mail",
-      info: "contato@cemparaum.com.br",
+      info: "cemparaum@gmail.com",
     },
     {
       icon: MapPin,
@@ -49,7 +49,7 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: MessageCircle, name: "WhatsApp", color: "text-green-500", eventName: "Click Social WhatsApp", href: "https://wa.me/5527999999999" },
+    { icon: MessageCircle, name: "WhatsApp", color: "text-green-500", eventName: "Click Social WhatsApp", href: "https://wa.me/5527995271995" },
     { icon: Instagram, name: "Instagram", color: "text-pink-500", eventName: "Click Social Instagram", href: "https://instagram.com" },
     { icon: Linkedin, name: "LinkedIn", color: "text-blue-500", eventName: "Click Social LinkedIn", href: "https://linkedin.com" }
   ];
@@ -121,27 +121,27 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-title mb-2">Nome *</label>
-                  <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome completo" className="bg-card/50 border-border focus:border-accent" required />
+                  <label htmlFor="name-input" className="block text-sm font-medium text-title mb-2">Nome *</label>
+                  <Input id="name-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome completo" className="bg-card/50 border-border focus:border-accent" required />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-title mb-2">Empresa</label>
-                  <Input value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Nome da sua empresa" className="bg-card/50 border-border focus:border-accent" />
+                  <label htmlFor="company-input" className="block text-sm font-medium text-title mb-2">Empresa</label>
+                  <Input id="company-input" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Nome da sua empresa" className="bg-card/50 border-border focus:border-accent" />
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-title mb-2">E-mail *</label>
-                  <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seu@email.com" className="bg-card/50 border-border focus:border-accent" required />
+                  <label htmlFor="email-input" className="block text-sm font-medium text-title mb-2">E-mail *</label>
+                  <Input id="email-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seu@email.com" className="bg-card/50 border-border focus:border-accent" required />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-title mb-2">Telefone *</label>
-                  <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(27) 9 9999-9999" className="bg-card/50 border-border focus:border-accent" required />
+                  <label htmlFor="phone-input" className="block text-sm font-medium text-title mb-2">Telefone *</label>
+                  <Input id="phone-input" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(27) 99527-1995" className="bg-card/50 border-border focus:border-accent" required />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-title mb-2">Serviço de Interesse</label>
-                <select value={service} onChange={(e) => setService(e.target.value)} className="w-full p-3 bg-card/50 border border-border rounded-lg focus:border-accent focus:outline-none text-foreground">
+                <label htmlFor="service-select" className="block text-sm font-medium text-title mb-2">Serviço de Interesse</label>
+                <select id="service-select" value={service} onChange={(e) => setService(e.target.value)} className="w-full p-3 bg-card/50 border border-border rounded-lg focus:border-accent focus:outline-none text-foreground">
                   <option value="">Selecione um serviço</option>
                   <option value="site">Criação de Site</option>
                   <option value="seo">SEO</option>
@@ -151,8 +151,8 @@ const Contact = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-title mb-2">Mensagem *</label>
-                <Textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Conte-nos sobre seu projeto e objetivos..." className="bg-card/50 border-border focus:border-accent min-h-32" required />
+                <label htmlFor="message-input" className="block text-sm font-medium text-title mb-2">Mensagem *</label>
+                <Textarea id="message-input" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Conte-nos sobre seu projeto e objetivos..." className="bg-card/50 border-border focus:border-accent min-h-32" required />
               </div>
               {feedbackMessage && <div className={`p-4 rounded-md text-sm ${status === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{feedbackMessage}</div>}
               <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-6 hover-glow" disabled={status === 'sending'}>

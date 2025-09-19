@@ -77,7 +77,7 @@ const Services = () => {
           <div className="w-16 h-1 bg-accent rounded-full mx-auto mb-6"></div>
           <p className="text-xl text-foreground/90 max-w-3xl mx-auto font-work-sans">
             Soluções completas de <strong>criação de sites, SEO e Google Meu Negócio</strong> pensadas para 
-            <span className="text-accent font-medium"> pequenos empreendedores do Espírito Santo.</span>
+            <a href="#sobre" className="text-accent font-medium hover:underline"> pequenos empreendedores do Espírito Santo.</a>
           </p>
         </div>
 

@@ -39,7 +39,7 @@ const Footer = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href === "#inicio" ? "body" : href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -55,7 +55,7 @@ const Footer = () => {
               aria-label="Voltar ao início"
             >
               <img
-                src="https://storage.googleapis.com/gpt-engineer-file-uploads/0XnzoAmIYDdsuGNKMG41GWHbgc73/uploads/1758074566465-logo100p1.png"
+                src="/logo.webp"
                 alt="100:1 Logo"
                 className="w-12 h-12"
               />
@@ -63,10 +63,10 @@ const Footer = () => {
                 <div className="text-2xl font-montserrat font-bold text-title">
                   100:1
                 </div>
-                <div className="text-sm text-accent">Cem para Um</div>
+                <div className="text-sm text-white/90">Cem para Um</div>
               </div>
             </button>
-            <p className="text-primary-foreground/80 font-work-sans max-w-sm">
+            <p className="text-primary-foreground font-work-sans max-w-sm">
               Agência de marketing digital em Serra/ES, focada em transformar a
               presença online de pequenos negócios locais.
             </p>
@@ -97,7 +97,7 @@ const Footer = () => {
                   <li key={linkIndex}>
                     <button
                       onClick={() => scrollToSection(link.href)}
-                      className="text-primary-foreground/80 hover:text-accent transition-colors font-work-sans text-left"
+                      className="text-primary-foreground hover:text-accent transition-colors font-work-sans text-left"
                     >
                       {link.label}
                     </button>
@@ -115,26 +115,26 @@ const Footer = () => {
             <ul className="space-y-3 font-work-sans">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-1 text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/80">
+                <span className="text-primary-foreground">
                   Av. Eucalipto 764, Vista da Serra 2 - Serra/ES
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 mt-1 text-accent flex-shrink-0" />
                 <a
-                  href="tel:+5527999999999"
-                  className="text-primary-foreground/80 hover:text-accent transition-colors"
+                  href="tel:+5527995271995"
+                  className="text-primary-foreground hover:text-accent transition-colors"
                 >
-                  (27) 9 9999-9999
+                  (27) 99527-1995
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 mt-1 text-accent flex-shrink-0" />
                 <a
-                  href="mailto:contato@cemparaum.com.br"
-                  className="text-primary-foreground/80 hover:text-accent transition-colors"
+                  href="mailto:cemparaum@gmail.com"
+                  className="text-primary-foreground hover:text-accent transition-colors"
                 >
-                  contato@cemparaum.com.br
+                  cemparaum@gmail.com
                 </a>
               </li>
             </ul>
@@ -142,7 +142,7 @@ const Footer = () => {
         </div>
 
         {/* Linha de Copyright */}
-        <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/70 font-work-sans">
+        <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/80 font-work-sans">
           <p>
             &copy; {new Date().getFullYear()} 100:1 Agência Digital. Todos os
             direitos reservados.

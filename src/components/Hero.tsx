@@ -31,17 +31,16 @@ const Hero = () => {
   }
 
   return (
-    <section 
-      id="inicio" 
+    <section
+      id="inicio"
       className="relative text-center overflow-hidden"
     >
       {/* Background Image & Overlay */}
       <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio" 
+        <img
+          src={heroImage}
+          alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio"
           className="w-full h-full object-cover"
-          loading="lazy"
           fetchPriority="high"
         />
         <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
@@ -52,7 +51,7 @@ const Hero = () => {
 
         {/* Main Content Block */}
         <div className="space-y-6 md:space-y-8 text-center pt-24 md:pt-16">
-          
+
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-card/50 border border-accent rounded-full px-4 py-2">
             <Sparkles className="w-4 h-4 text-accent" />
@@ -61,9 +60,7 @@ const Hero = () => {
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-extrabold leading-none bg-gradient-to-b from-title to-accent text-transparent bg-clip-text drop-shadow-md">
-            <span className="block">Plante.</span>
-            <span className="block">Cresça.</span>
-            <span className="block">Colha.</span>
+            Criação de Sites e SEO no Espírito Santo
           </h1>
           <div className="w-20 h-1 bg-accent rounded-full mx-auto"></div>
 
@@ -75,7 +72,7 @@ const Hero = () => {
           {/* Feature Cards */}
           <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 md:pt-6">
             {features.map((feature, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-card/50 backdrop-blur-md p-4 md:p-5 rounded-xl border-2 border-accent text-center space-y-2 hover-glow"
               >
@@ -90,7 +87,7 @@ const Hero = () => {
 
           {/* CTA Button */}
           <div className="pt-6 md:pt-8">
-              <Button 
+              <Button
                 size="lg"
                 className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-5 text-sm sm:text-base hover-glow"
                 onClick={handleCTAClick}
