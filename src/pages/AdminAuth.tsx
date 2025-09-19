@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { supabaseAdmin } from '@/integrations/supabase/adminClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -20,7 +20,7 @@ const AdminAuth = () => {
 
   useEffect(() => {
     // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    const { data: { subscription } } = supabaseAdmin.auth.onAuthStateChange(
       (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
@@ -35,7 +35,7 @@ const AdminAuth = () => {
     );
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabaseAdmin.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
       
@@ -49,7 +49,7 @@ const AdminAuth = () => {
 
   const checkAdminAndRedirect = async (userId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('admin_users')
         .select('id')
         .eq('user_id', userId)
@@ -69,7 +69,7 @@ const AdminAuth = () => {
 
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { error } = await supabaseAdmin.auth.signInWithPassword({
           email,
           password,
         });
@@ -89,7 +89,7 @@ const AdminAuth = () => {
       } else {
         const redirectUrl = `${window.location.origin}/admin/auth`;
         
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabaseAdmin.auth.signUp({
           email,
           password,
           options: {
@@ -105,7 +105,7 @@ const AdminAuth = () => {
           });
         } else if (data.user) {
           // Create admin user record
-          const { error: adminError } = await supabase
+          const { error: adminError } = await supabaseAdmin
             .from('admin_users')
             .insert({
               user_id: data.user.id,
@@ -134,7 +134,7 @@ const AdminAuth = () => {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await supabaseAdmin.auth.signOut();
     setEmail('');
     setPassword('');
     toast({
