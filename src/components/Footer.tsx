@@ -89,9 +89,9 @@ const Footer = () => {
           {/* Colunas de Links */}
           {footerSections.map((section, index) => (
             <div key={index} className="space-y-4">
-              <h3 className="text-lg font-montserrat font-semibold text-title uppercase tracking-wider">
+              <h4 className="text-lg font-montserrat font-semibold text-title uppercase tracking-wider">
                 {section.title}
-              </h3>
+              </h4>
               <ul className="space-y-2">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
@@ -109,9 +109,9 @@ const Footer = () => {
 
           {/* Coluna de Contato */}
           <div className="space-y-4">
-            <h3 className="text-lg font-montserrat font-semibold text-title uppercase tracking-wider">
+            <h4 className="text-lg font-montserrat font-semibold text-title uppercase tracking-wider">
               Contato
-            </h3>
+            </h4>
             <ul className="space-y-3 font-work-sans">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-1 text-accent flex-shrink-0" />

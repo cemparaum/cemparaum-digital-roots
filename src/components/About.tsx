@@ -1,6 +1,6 @@
 import { Heart, Target, Users, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import teamImage from "@/assets/about_us.png";
+import teamImage from "@/assets/about_us.webp";
 
 const About = () => {
   const values = [
@@ -98,9 +98,9 @@ const About = () => {
                   className="bg-card/50 backdrop-blur-sm p-6 rounded-xl border border-border hover-glow"
                 >
                   <value.icon className="w-8 h-8 text-accent mb-3" />
-                  <h3 className="font-montserrat font-semibold text-title mb-2">
+                  <h4 className="font-montserrat font-semibold text-title mb-2">
                     {value.title}
-                  </h3>
+                  </h4>
                   <p className="text-sm text-foreground/80 font-work-sans">
                     {value.description}
                   </p>

@@ -60,7 +60,7 @@ const Navigation = () => {
           </button>
 
           {/* Menu Desktop */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {menuItems.map((item) => (
               <button
                 key={item.label}
@@ -73,7 +73,7 @@ const Navigation = () => {
           </div>
 
           {/* CTA Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <Button
               variant="outline"
               className="border-accent/30 text-accent hover:bg-accent/10"
@@ -95,7 +95,7 @@ const Navigation = () => {
 
           {/* Botão Mobile */}
           <button
-            className="md:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-foreground"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle mobile menu"
           >
@@ -105,7 +105,7 @@ const Navigation = () => {
 
         {/* Menu Mobile */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border">
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border">
             <div className="container mx-auto px-4 py-6 space-y-4">
               {menuItems.map((item) => (
                 <button

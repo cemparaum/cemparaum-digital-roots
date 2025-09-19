@@ -7,7 +7,7 @@ import {
   ArrowRight,
   CheckCircle 
 } from "lucide-react";
-import fullpackImage from "@/assets/fullpack.png";
+import fullpackImage from "@/assets/fullpack.webp";
 import { trackClick } from "@/utils/dataLayer"; // Import tracking function
 
 const Services = () => {

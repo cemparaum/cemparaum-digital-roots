@@ -181,7 +181,7 @@ const Contact = () => {
               ))}
             </div>
             <div>
-              <h4 className="font-semibold text-title font-montserrat mb-4">Siga-nos nas Redes Sociais</h4>
+              <h3 className="font-semibold text-title font-montserrat mb-4">Siga-nos nas Redes Sociais</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
                   <a 
