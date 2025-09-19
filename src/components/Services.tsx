@@ -7,7 +7,8 @@ import {
   ArrowRight,
   CheckCircle 
 } from "lucide-react";
-import servicesImage from "@/assets/services-image.jpg";
+import fullpackImage from "@/assets/fullpack.png";
+import { trackClick } from "@/utils/dataLayer"; // Import tracking function
 
 const Services = () => {
   const services = [
@@ -46,7 +47,7 @@ const Services = () => {
     },
     {
       icon: BarChart3,
-      title: "Rastreio de Dados",
+      title: "Rastreamento de Dados",
       description: "Análise detalhada do comportamento dos usuários para otimizar resultados.",
       features: [
         "Google Analytics 4",
@@ -56,6 +57,14 @@ const Services = () => {
       ]
     }
   ];
+
+  const handleCTAClick = () => {
+    trackClick("Services", "Click Comecar Projeto Pacote Completo", "#contato");
+    const contactSection = document.querySelector('#contato');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   return (
     <section id="servicos" className="py-20 bg-background">
@@ -68,7 +77,7 @@ const Services = () => {
           <div className="w-16 h-1 bg-accent rounded-full mx-auto mb-6"></div>
           <p className="text-xl text-foreground/90 max-w-3xl mx-auto font-work-sans">
             Soluções completas de <strong>criação de sites, SEO e Google Meu Negócio</strong> pensadas para 
-            <span className="text-accent font-medium">pequenos empreendedores do Espírito Santo.</span>
+            <span className="text-accent font-medium"> pequenos empreendedores do Espírito Santo.</span>
           </p>
         </div>
 
@@ -77,7 +86,7 @@ const Services = () => {
           {services.map((service, index) => (
             <div 
               key={index}
-              className="bg-card border border-border rounded-2xl p-8 hover-glow transition-all duration-300 group"
+              className="bg-card border border-accent/70 rounded-2xl p-8 hover-glow transition-all duration-300 group flex flex-col"
             >
               {/* Ícone */}
               <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
@@ -89,12 +98,12 @@ const Services = () => {
                 {service.title}
               </h3>
               
-              <p className="text-foreground/80 mb-6 font-work-sans">
+              <p className="text-foreground/80 mb-6 font-work-sans flex-grow">
                 {service.description}
               </p>
 
               {/* Features */}
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center gap-3 text-sm">
                     <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
@@ -102,15 +111,6 @@ const Services = () => {
                   </li>
                 ))}
               </ul>
-
-              {/* Botão */}
-              <Button 
-                className="w-full bg-accent/10 hover:bg-accent text-accent hover:text-accent-foreground border border-accent/20"
-                variant="outline"
-              >
-                Saber Mais
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
             </div>
           ))}
         </div>
@@ -118,10 +118,10 @@ const Services = () => {
         {/* Seção de destaque */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary to-primary/80 p-8 md:p-12">
           {/* Imagem de fundo */}
-          <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 opacity-10">
             <img 
-              src={servicesImage} 
-              alt="Serviços de marketing digital da 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio para empreendedores" 
+              src={fullpackImage} 
+              alt="Pacote Completo de Digitalização da 100:1 - Marketing Digital em Serra ES" 
               className="w-full h-full object-cover"
               loading="lazy"
             />
@@ -133,13 +133,14 @@ const Services = () => {
             </h3>
             <p className="text-xl text-foreground/90 mb-8 max-w-2xl mx-auto">
               Transforme sua presença online com nossa solução completa. 
-              <span className="text-accent font-semibold">Otimize seu tempo e investimento</span> ao integrar todos os serviços que seu negócio precisa para crescer de forma sustentável.
+              <span className="text-accent font-semibold"> Otimize seu tempo e investimento</span> ao integrar todos os serviços que seu negócio precisa para crescer de forma sustentável.
             </p>
             
             <div className="flex justify-center">
               <Button 
                 size="lg"
                 className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg hover-glow"
+                onClick={handleCTAClick}
               >
                 Começar Meu Projeto
                 <ArrowRight className="ml-2 w-5 h-5" />

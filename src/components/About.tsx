@@ -1,6 +1,6 @@
 import { Heart, Target, Users, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import teamImage from "@/assets/team-image.jpg";
+import teamImage from "@/assets/about_us.png";
 
 const About = () => {
   const values = [
@@ -25,6 +25,13 @@ const About = () => {
       description: "Unimos o melhor da tecnologia com a simplicidade, para que você possa focar no que realmente importa: seu negócio."
     }
   ];
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section id="sobre" className="py-20 bg-card/30">
@@ -68,6 +75,7 @@ const About = () => {
                 <Button 
                   size="lg" 
                   className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg hover-glow"
+                  onClick={() => scrollToSection('#contato')}
                 >
                   Começar Meu Projeto
                   <ArrowRight className="ml-2 w-5 h-5" />

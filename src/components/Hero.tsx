@@ -1,89 +1,111 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Target, Heart, DollarSign } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
+import { trackClick } from "@/utils/dataLayer"; // Import tracking function
 
 const Hero = () => {
+  const features = [
+    {
+      icon: Target,
+      title: "Foco Total 1:1",
+      description: "Atendimento individualizado para entender e atender suas necessidades."
+    },
+    {
+      icon: Heart,
+      title: "Atendimento Humano",
+      description: "Conversamos de verdade, sem robôs, para criar uma parceria de confiança."
+    },
+    {
+      icon: DollarSign,
+      title: "Custo-Benefício",
+      description: "O melhor retorno para o seu investimento, com preços justos e acessíveis."
+    }
+  ];
+
+  const handleCTAClick = () => {
+    trackClick("Hero", "Click Comecar Projeto", "#contato");
+    const contactSection = document.querySelector('#contato');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background com gradiente */}
-      <div className="absolute inset-0 hero-gradient"></div>
-      
-      {/* Imagem de fundo com overlay */}
+    <section 
+      id="inicio" 
+      className="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
+    >
+      {/* Background Image & Overlay */}
       <div className="absolute inset-0">
         <img 
           src={heroImage} 
-          alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio para pequenos empreendedores no Espírito Santo" 
-          className="w-full h-full object-cover opacity-20"
+          alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio" 
+          className="w-full h-full object-cover"
           loading="eager"
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/40"></div>
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
       </div>
 
-      {/* Conteúdo principal */}
-      <div className="relative z-10 container mx-auto px-4 text-center fade-in">
-        <div className="max-w-4xl mx-auto">
-          {/* Badge superior */}
-          <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2 mb-8 bounce-in">
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-accent">Agência de Marketing Digital</span>
-          </div>
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto px-4 space-y-8 md:space-y-6 pt-24 md:pt-8">
+        
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 bg-card/50 border border-accent rounded-full px-4 py-2">
+          <Sparkles className="w-4 h-4 text-accent" />
+          <span className="text-xs font-medium text-foreground">Agência de Marketing Digital</span>
+        </div>
 
-          {/* Título principal */}
-          <h1 className="text-5xl md:text-7xl font-montserrat font-bold text-title mb-6 leading-tight">
-            Criação de Sites em Serra ES - Plante. Cresça.
-            <span className="block text-accent">Colha.</span>
-          </h1>
+        {/* Headline */}
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-extrabold leading-none bg-gradient-to-b from-title to-accent text-transparent bg-clip-text drop-shadow-md">
+          <span className="block">Plante.</span>
+          <span className="block">Cresça.</span>
+          <span className="block">Colha.</span>
+        </h1>
+        <div className="w-20 h-1 bg-accent rounded-full mx-auto"></div>
 
-          {/* Subtítulo */}
-          <p className="text-xl md:text-2xl text-foreground/90 mb-8 max-w-3xl mx-auto font-work-sans">
-            Transformamos <strong>pequenos empreendedores do Espírito Santo</strong> em gigantes digitais com <strong>SEO, criação de sites</strong> e marketing digital. 
-            <span className="text-accent font-medium">Sua jornada digital começa com uma semente de confiança.</span>
-          </p>
+        {/* Subtitle */}
+        <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-foreground/80 font-work-sans leading-relaxed">
+          Transformamos pequenos empreendedores do Espírito Santo em gigantes digitais com <strong className="text-accent">SEO, criação de sites</strong> e <strong className="text-accent">marketing digital</strong>. Sua jornada digital começa com uma semente de <strong className="text-accent">confiança</strong>.
+        </p>
 
-          {/* Estatísticas rápidas */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-2xl mx-auto">
-            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border border-border">
-              <div className="text-2xl font-bold text-accent">100+</div>
-              <div className="text-sm text-muted-foreground">Projetos Entregues</div>
+        {/* Feature Cards */}
+        <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 md:pt-6">
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="bg-card/50 backdrop-blur-md p-4 md:p-5 rounded-xl border-2 border-accent text-center space-y-2 hover-glow"
+            >
+              <div className="inline-block bg-accent/10 p-2 rounded-full">
+                <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
+              </div>
+              <h3 className="text-base sm:text-lg font-montserrat font-semibold text-title">{feature.title}</h3>
+              <p className="text-foreground/80 font-work-sans text-xs">{feature.description}</p>
             </div>
-            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border border-border">
-              <div className="text-2xl font-bold text-accent">3 anos</div>
-              <div className="text-sm text-muted-foreground">No Mercado</div>
-            </div>
-            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border border-border">
-              <div className="text-2xl font-bold text-accent">24h</div>
-              <div className="text-sm text-muted-foreground">Suporte Médio</div>
-            </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Botões de ação */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        {/* CTA Button */}
+        <div className="pt-4 md:pt-6 pb-12 sm:pb-0">
             <Button 
-              size="lg" 
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-6 text-lg hover-glow"
+              size="lg"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-5 text-sm sm:text-base hover-glow"
+              onClick={handleCTAClick}
             >
               Começar Meu Projeto
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-accent/30 text-accent hover:bg-accent/10 px-8 py-6 text-lg font-semibold"
-            >
-              Ver Nossos Cases
-            </Button>
-          </div>
-
-          {/* Indicador de scroll */}
-          <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 scroll-indicator">
-            <div className="w-6 h-10 border-2 border-accent/40 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-accent rounded-full mt-2 scroll-dot"></div>
-            </div>
-          </div>
         </div>
+
       </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block">
+            <div className="w-5 h-9 border-2 border-accent rounded-full flex justify-center p-1">
+              <div className="w-0.5 h-2 bg-accent rounded-full animate-bounce"></div>
+            </div>
+        </div>
+
     </section>
   );
 };
