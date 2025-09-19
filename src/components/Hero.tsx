@@ -50,7 +50,7 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 flex flex-col min-h-screen justify-center">
 
         {/* Main Content Block */}
-        <div className="space-y-6 md:space-y-8 text-center pt-24 md:pt-16">
+        <div className="space-y-6 md:space-y-8 text-center pt-24 md:pt-16 pb-12 sm:pb-0">
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-card/50 border border-accent rounded-full px-4 py-2">
@@ -103,7 +103,7 @@ const Hero = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="mx-auto pt-12 pb-8 hidden sm:block">
+        <div className="mx-auto pt-12 pb-24 hidden sm:block">
             <div className="w-5 h-9 border-2 border-accent rounded-full flex justify-center p-1">
               <div className="w-0.5 h-2 bg-accent rounded-full animate-bounce"></div>
             </div>
