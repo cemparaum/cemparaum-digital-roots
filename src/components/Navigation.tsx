@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
-import { trackClick } from "@/utils/dataLayer"; // Import tracking function
+import { Menu, X } from "lucide-react";
+import { trackClick } from "@/utils/dataLayer";
+import Logo from "@/assets/logo.webp";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ const Navigation = () => {
     { label: "Início", href: "#inicio" },
     { label: "Serviços", href: "#servicos" },
     { label: "Sobre", href: "#sobre" },
-    { label: "Contato", href: "#contato" }
+    { label: "Contato", href: "#contato" },
   ];
 
   useEffect(() => {
@@ -19,42 +20,40 @@ const Navigation = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleNavClick = (href: string, label: string) => {
     trackClick("Navigation", `Scroll to ${label}`, href);
     const element = document.querySelector(href === "#inicio" ? "body" : href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setIsOpen(false);
   };
 
   return (
-    <header 
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-lg' 
-          : 'bg-transparent'
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <nav className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <button 
+          <button
             onClick={() => handleNavClick("#inicio", "Logo")}
             className="flex items-center h-full py-2 space-x-3 cursor-pointer"
             aria-label="Voltar ao início"
           >
-            <img 
-              src="https://storage.googleapis.com/gpt-engineer-file-uploads/0XnzoAmIYDdsuGNKMG41GWHbgc73/uploads/1758074566465-logo100p1.png" 
-              alt="100:1 Logo" 
-              className="h-full w-auto"
-            />
+            <img src={Logo} alt="100:1 Logo" className="h-full w-auto" />
             <div className="text-left">
-              <div className="text-title font-montserrat font-bold text-2xl">100:1</div>
+              <div className="text-title font-montserrat font-bold text-2xl">
+                100:1
+              </div>
               <div className="text-sm text-accent">Cem para Um</div>
             </div>
           </button>
@@ -75,19 +74,8 @@ const Navigation = () => {
           {/* CTA Desktop */}
           <div className="hidden lg:flex items-center space-x-4">
             <Button
-              variant="outline"
-              className="border-accent/30 text-accent hover:bg-accent/10"
-              onClick={() => {
-                trackClick("Navigation", "Click Telefone CTA", "tel:+5527999999999");
-                window.open('tel:+5527999999999');
-              }}
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              (27) 9 9999-9999
-            </Button>
-            <Button 
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold hover-glow"
-              onClick={() => handleNavClick('#contato', 'Comecar Projeto CTA')}
+              onClick={() => handleNavClick("#contato", "Comecar Projeto CTA")}
             >
               Começar Meu Projeto
             </Button>
@@ -116,22 +104,13 @@ const Navigation = () => {
                   {item.label}
                 </button>
               ))}
-              
+
               <div className="pt-4 space-y-3">
                 <Button
-                  variant="outline"
-                  className="w-full border-accent/30 text-accent hover:bg-accent/10"
-                  onClick={() => {
-                    trackClick("Navigation", "Click Telefone CTA Mobile", "tel:+5527999999999");
-                    window.open('tel:+5527999999999');
-                  }}
-                >
-                  <Phone className="w-4 h-4 mr-2" />
-                  (27) 9 9999-9999
-                </Button>
-                <Button 
                   className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
-                  onClick={() => handleNavClick('#contato', 'Comecar Projeto CTA Mobile')}
+                  onClick={() =>
+                    handleNavClick("#contato", "Comecar Projeto CTA Mobile")
+                  }
                 >
                   Começar Meu Projeto
                 </Button>

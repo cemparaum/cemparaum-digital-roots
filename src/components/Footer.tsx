@@ -1,155 +1,131 @@
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
-  Youtube,
-  MapPin,
-  Phone,
-  Mail,
-} from "lucide-react";
+import { trackClick } from "@/utils/dataLayer";
+import { Instagram, Facebook, MapPin, Phone, Mail, Heart, MessageCircle } from "lucide-react";
+import Logo from "@/assets/logo.webp";
 
 const Footer = () => {
-  const footerSections = [
-    {
-      title: "Sobre Nós",
-      links: [
-        { label: "Nossa História", href: "#sobre" },
-        { label: "Valores", href: "#sobre" },
-        { label: "Blog", href: "#" },
-      ],
-    },
-    {
-      title: "Serviços",
-      links: [
-        { label: "Criação de Sites", href: "#servicos" },
-        { label: "SEO", href: "#servicos" },
-        { label: "Google Meu Negócio", href: "#servicos" },
-        { label: "Rastreamento de Dados", href: "#servicos" },
-      ],
-    },
-  ];
+  const whatsappLink = "https://wa.me/5527995271995";
 
   const socialLinks = [
-    { icon: Instagram, href: "#", name: "Instagram" },
-    { icon: Linkedin, href: "#", name: "LinkedIn" },
-    { icon: Facebook, href: "#", name: "Facebook" },
+    {
+      name: "Instagram",
+      icon: Instagram,
+      url: "https://www.instagram.com/agenciacemparaum/",
+    },
+    {
+      name: "Facebook",
+      icon: Facebook,
+      url: "https://www.facebook.com/profile.php?id=61581129239277",
+    },
+    {
+      name: "WhatsApp",
+      icon: MessageCircle,
+      url: whatsappLink,
+    },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href === "#inicio" ? "body" : href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const aboutLinks = [
+    { label: "Nossa História", href: "#sobre" },
+    { label: "Valores", href: "#sobre" },
+    { label: "Blog", href: "#" },
+  ];
 
+  const servicesLinks = [
+    { label: "Criação de Sites", href: "#servicos" },
+    { label: "SEO", href: "#servicos" },
+    { label: "Google Meu Negócio", href: "#servicos" },
+    { label: "Rastreamento de Dados", href: "#servicos" },
+  ];
+  
   return (
-    <footer className="bg-primary text-primary-foreground pt-16 pb-8">
+    <footer className="bg-background text-foreground pt-20 pb-8 font-work-sans">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-12">
-          {/* Coluna 1: Logo e Descrição */}
-          <div className="md:col-span-4 lg:col-span-2 space-y-4">
-            <button
-              onClick={() => scrollToSection("#inicio")}
-              className="flex items-center space-x-3 text-left cursor-pointer"
-              aria-label="Voltar ao início"
-            >
-              <img
-                src="/logo.webp"
-                alt="100:1 Logo"
-                className="w-12 h-12"
-              />
-              <div>
-                <div className="text-2xl font-montserrat font-bold text-title">
-                  100:1
+        {/* Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+          
+          {/* Col 1: Logo and Social */}
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
+             <div className="mb-4 flex items-center space-x-3">
+                <img src={Logo} alt="100:1 Logo" className="h-12 w-auto" />
+                <div>
+                    <div className="font-montserrat font-bold text-2xl text-title">100:1</div>
+                    <div className="text-sm text-accent">Cem para Um</div>
                 </div>
-                <div className="text-sm text-white/90">Cem para Um</div>
-              </div>
-            </button>
-            <p className="text-primary-foreground font-work-sans max-w-sm">
-              Agência de marketing digital em Serra/ES, focada em transformar a
-              presença online de pequenos negócios locais.
+            </div>
+            <p className="text-sm mb-6 max-w-xs text-muted-foreground">
+                Agência de marketing digital em Serra/ES, focada em transformar a presença online de pequenos negócios locais.
             </p>
-            <div className="flex space-x-4 pt-2">
-              {socialLinks.map((social, index) => (
+            <div className="flex space-x-3">
+              {socialLinks.map((link) => (
                 <a
-                  key={index}
-                  href={social.href}
+                  key={link.name}
+                  href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={social.name}
-                  className="w-10 h-10 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground transition-colors"
+                  onClick={() => trackClick("Footer", `Click Social ${link.name}`, link.url)}
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-border hover:bg-muted/50 transition-colors"
+                  aria-label={link.name}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <link.icon className="h-5 w-5 text-muted-foreground" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Colunas de Links */}
-          {footerSections.map((section, index) => (
-            <div key={index} className="space-y-4">
-              <h4 className="text-lg font-montserrat font-semibold text-title uppercase tracking-wider">
-                {section.title}
-              </h4>
-              <ul className="space-y-2">
-                {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="text-primary-foreground hover:text-accent transition-colors font-work-sans text-left"
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Col 2: Sobre Nós */}
+          <div>
+            <h3 className="font-montserrat font-bold text-lg text-title mb-4">SOBRE NÓS</h3>
+            <ul className="space-y-3 text-muted-foreground">
+              {aboutLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="hover:text-accent transition-colors">{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* Coluna de Contato */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-montserrat font-semibold text-title uppercase tracking-wider">
-              Contato
-            </h4>
-            <ul className="space-y-3 font-work-sans">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-1 text-accent flex-shrink-0" />
-                <span className="text-primary-foreground">
-                  Av. Eucalipto 764, Vista da Serra 2 - Serra/ES
-                </span>
+          {/* Col 3: Serviços */}
+          <div>
+            <h3 className="font-montserrat font-bold text-lg text-title mb-4">SERVIÇOS</h3>
+            <ul className="space-y-3 text-muted-foreground">
+              {servicesLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="hover:text-accent transition-colors">{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 4: Contato */}
+          <div>
+            <h3 className="font-montserrat font-bold text-lg text-title mb-4">CONTATO</h3>
+            <ul className="space-y-4 text-muted-foreground">
+              <li className="flex items-start">
+                <MapPin className="w-5 h-5 mr-3 mt-1 flex-shrink-0 text-accent" />
+                <span>Av. Eucalipto 764, Vista da Serra 2 - Serra/ES</span>
               </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 mt-1 text-accent flex-shrink-0" />
-                <a
-                  href="tel:+5527995271995"
-                  className="text-primary-foreground hover:text-accent transition-colors"
-                >
-                  (27) 99527-1995
+              <li className="flex items-center">
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer"  onClick={() => trackClick("Footer", "Click WhatsApp Phone", whatsappLink)} className="flex items-center hover:text-accent transition-colors">
+                  <Phone className="w-5 h-5 mr-3 text-accent" />
+                  <span>(27) 99527-1995</span>
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 mt-1 text-accent flex-shrink-0" />
-                <a
-                  href="mailto:cemparaum@gmail.com"
-                  className="text-primary-foreground hover:text-accent transition-colors"
-                >
-                  cemparaum@gmail.com
-                </a>
+              <li className="flex items-center">
+                <a href="mailto:cemparaum@gmail.com" onClick={() => trackClick("Footer", "Click Email", "mailto:cemparaum@gmail.com")} className="flex items-center hover:text-accent transition-colors">
+                  <Mail className="w-5 h-5 mr-3 text-accent" />
+                  <span>cemparaum@gmail.com</span>
+                 </a>
               </li>
             </ul>
           </div>
+
         </div>
 
-        {/* Linha de Copyright */}
-        <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/80 font-work-sans">
-          <p>
-            &copy; {new Date().getFullYear()} 100:1 Agência Digital. Todos os
-            direitos reservados.
-          </p>
-          <p className="mt-1">
-            Desenvolvido com ❤️ no Espírito Santo.
-          </p>
+        {/* Bottom Section */}
+        <div className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
+            <p>© {new Date().getFullYear()} 100:1 Agência Digital. Todos os direitos reservados.</p>
+            <p className="flex items-center justify-center mt-2">
+                Desenvolvido com <Heart className="w-4 h-4 mx-1.5 text-red-500 fill-current" /> no Espírito Santo.
+            </p>
         </div>
       </div>
     </footer>
