@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === "development" && componentTagger(),
-    visualizer({ open: true, filename: "stats.html" }), // Add this line
+    // visualizer({ open: true, filename: "stats.html" }), // Add this line
   ].filter(Boolean),
   resolve: {
     alias: {
