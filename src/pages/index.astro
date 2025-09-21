@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.tsx';
+import Hero from '../components/Hero.tsx';
+import Services from '../components/Services.tsx';
+import About from '../components/About.tsx';
+import Contact from '../components/Contact.tsx';
+import Footer from '../components/Footer.tsx';
+
+const pageTitle = "100:1 Agência de Criação de Sites Profissionais - Serra ES";
+const pageDescription = "Somos especialistas na criação de sites profissionais focados em posicionamento no Google (SEO). Construímos sites 100% personalizados.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+	<Navigation client:load />
+	<main>
+		<Hero client:load />
+		<Services />
+		<About />
+		<Contact client:load />
+	</main>
+	<Footer />
+</Layout>

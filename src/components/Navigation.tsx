@@ -49,7 +49,7 @@ const Navigation = () => {
             className="flex items-center h-full py-2 space-x-3 cursor-pointer"
             aria-label="Voltar ao início"
           >
-            <img src={Logo} alt="100:1 Logo" className="h-full w-auto" />
+            <img src={Logo.src} alt="100:1 Logo" className="h-full w-auto" />
             <div className="text-left">
               <div className="text-title font-montserrat font-bold text-2xl">
                 100:1

@@ -41,7 +41,7 @@ const About = () => {
           <div className="relative">
             <div className="relative overflow-hidden rounded-2xl">
               <img 
-                src={teamImage} 
+                src={teamImage.src} 
                 alt="Equipe da 100:1 Agência Digital em Serra ES - Especialistas em criação de sites, SEO e Google Meu Negócio para empreendedores do Espírito Santo" 
                 className="w-full h-96 object-cover"
                 loading="lazy"

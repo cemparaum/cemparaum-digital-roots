@@ -120,7 +120,7 @@ const Services = () => {
           {/* Imagem de fundo */}
           <div className="absolute inset-0 opacity-10">
             <img 
-              src={fullpackImage} 
+              src={fullpackImage.src} 
               alt="Pacote Completo de Digitalização da 100:1 - Marketing Digital em Serra ES" 
               className="w-full h-full object-cover"
               loading="lazy"

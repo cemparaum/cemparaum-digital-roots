@@ -1,0 +1,70 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Logo from "@/assets/logo.webp";
+import "../index.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href={Logo.src} />
+    
+    <!-- Astro View Transitions -->
+    <ViewTransitions />
+  </head>
+  <body
+    class="bg-background text-foreground font-sans antialiased selection:bg-accent selection:text-accent-foreground"
+  >
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* Importa as fontes do Google */
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap");
+
+  /* Estilização da barra de rolagem */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--secondary));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary));
+    border-radius: 10px;
+    border: 2px solid hsl(var(--secondary));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--primary) / 0.8);
+  }
+
+  /* Animação de "glow" reutilizável */
+  .hover-glow {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 15px 0px hsl(var(--accent) / 0.5);
+  }
+</style>

@@ -38,10 +38,9 @@ const Hero = () => {
       {/* Background Image & Overlay */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
+          src={heroImage.src}
           alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio"
           className="w-full h-full object-cover"
-          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
       </div>
@@ -52,20 +51,23 @@ const Hero = () => {
         {/* Main Content Block */}
         <div className="space-y-6 md:space-y-8 text-center pt-24 md:pt-16 pb-12 sm:pb-0">
 
+          {/* SEO H1 (Visually Hidden) */}
+          <h1 className="sr-only">Criação de Sites Profissionais e SEO em Serra, ES</h1>
+
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-card/50 border border-accent rounded-full px-4 py-2">
             <Sparkles className="w-4 h-4 text-accent" />
             <span className="text-xs font-medium text-foreground">Agência de Marketing Digital</span>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-extrabold leading-tight bg-gradient-to-b from-title to-accent text-transparent bg-clip-text drop-shadow-md">
+          {/* Visual Headline */}
+          <p className="text-4xl sm:text-5xl md:text-7xl font-montserrat font-extrabold leading-tight bg-gradient-to-b from-title to-accent text-transparent bg-clip-text drop-shadow-md">
             Plante.
             <br />
             Cresça.
             <br />
             Colha.
-          </h1>
+          </p>
           <div className="w-20 h-1 bg-accent rounded-full mx-auto"></div>
 
           {/* Subtitle */}
@@ -86,7 +88,8 @@ const Hero = () => {
                 <h2 className="text-base sm:text-lg font-montserrat font-semibold text-title">{feature.title}</h2>
                 <p className="text-foreground/80 font-work-sans text-xs">{feature.description}</p>
               </div>
-            ))}
+            ))
+          }
           </div>
 
           {/* CTA Button */}
