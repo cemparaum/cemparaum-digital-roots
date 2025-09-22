@@ -7,14 +7,14 @@ import {
   ArrowRight,
   CheckCircle 
 } from "lucide-react";
-import fullpackImage from "@/assets/fullpack.webp";
-import { trackClick } from "@/utils/dataLayer"; // Import tracking function
+import { trackClick } from "@/utils/dataLayer";
 
-const Services = () => {
+const Services = ({ fullpackImageSrc }: { fullpackImageSrc: string }) => {
   const services = [
     {
       icon: Globe,
       title: "Criação de Sites",
+      slug: "criacao-de-sites",
       description: "Sites modernos, responsivos e otimizados que convertem visitantes em clientes.",
       features: [
         "Design responsivo e moderno",
@@ -26,6 +26,7 @@ const Services = () => {
     {
       icon: Search,
       title: "SEO Profissional",
+      slug: "seo-profissional",
       description: "Posicione seu negócio no topo do Google e aumente sua visibilidade online.",
       features: [
         "Análise de palavras-chave",
@@ -37,6 +38,7 @@ const Services = () => {
     {
       icon: MapPin,
       title: "Google Meu Negócio",
+      slug: "google-meu-negocio",
       description: "Otimização completa do seu perfil para aparecer nas buscas locais.",
       features: [
         "Configuração completa",
@@ -48,6 +50,7 @@ const Services = () => {
     {
       icon: BarChart3,
       title: "Rastreamento de Dados",
+      slug: "rastreamento-de-dados",
       description: "Análise detalhada do comportamento dos usuários para otimizar resultados.",
       features: [
         "Google Analytics 4",
@@ -84,9 +87,11 @@ const Services = () => {
         {/* Grid de serviços */}
         <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-16">
           {services.map((service, index) => (
-            <div 
+            <a 
               key={index}
-              className="bg-card border border-accent/70 rounded-2xl p-8 hover-glow transition-all duration-300 group flex flex-col"
+              href={`/servicos/${service.slug}`}
+              className="bg-card border border-accent/70 rounded-2xl p-8 hover-glow transition-all duration-300 group flex flex-col no-underline text-current"
+              onClick={() => trackClick("Service Card", `Click ${service.title}`, `/servicos/${service.slug}`)}
             >
               {/* Ícone */}
               <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
@@ -103,7 +108,7 @@ const Services = () => {
               </p>
 
               {/* Features */}
-              <ul className="space-y-3">
+              <ul className="space-y-3 mb-8">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center gap-3 text-sm">
                     <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
@@ -111,7 +116,17 @@ const Services = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+
+              {/* Botão Saiba Mais */}
+              <div className="mt-auto">
+                <Button 
+                  variant="outline" 
+                  className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+                >
+                  Saiba Mais <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
+            </a>
           ))}
         </div>
 
@@ -120,7 +135,7 @@ const Services = () => {
           {/* Imagem de fundo */}
           <div className="absolute inset-0 opacity-10">
             <img 
-              src={fullpackImage.src} 
+              src={fullpackImageSrc} 
               alt="Pacote Completo de Digitalização da 100:1 - Marketing Digital em Serra ES" 
               className="w-full h-full object-cover"
               loading="lazy"

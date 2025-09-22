@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Target, Heart, DollarSign } from "lucide-react";
-import heroImage from "@/assets/hero-image.webp";
 import { trackClick } from "@/utils/dataLayer"; // Import tracking function
 
-const Hero = () => {
+interface HeroImages {
+  desktop: ImageMetadata;
+  mobile: ImageMetadata;
+}
+
+const Hero = ({ heroImages }: { heroImages: HeroImages }) => {
   const features = [
     {
       icon: Target,
@@ -37,11 +41,15 @@ const Hero = () => {
     >
       {/* Background Image & Overlay */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage.src}
-          alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio"
-          className="w-full h-full object-cover"
-        />
+        <picture>
+            <source media="(max-width: 768px)" srcSet={heroImages.mobile.src} />
+            <source media="(min-width: 769px)" srcSet={heroImages.desktop.src} />
+            <img
+              src={heroImages.desktop.src}
+              alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio"
+              className="w-full h-full object-cover"
+            />
+        </picture>
         <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
       </div>
 

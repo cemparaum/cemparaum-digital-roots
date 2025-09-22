@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+
+const slug = post.slug;
+const postUrl = slug ? `/blog/${slug}` : null;
+
+// The remote image URL from Strapi
+const imageUrl = post.cover?.url;
+
+// We need to provide the original dimensions for Astro to optimize the remote image
+const imageWidth = post.cover?.width;
+const imageHeight = post.cover?.height;
+
+const title = post.title;
+const excerpt = post.description;
+const publishedAt = post.publishedAt;
+
+// We need the image URL and its dimensions to render the card properly
+const canRender = postUrl && title && imageUrl && imageWidth && imageHeight && publishedAt;
+---
+
+{canRender && (
+  <a 
+    href={postUrl} 
+    class="group block bg-card rounded-lg shadow-md overflow-hidden transition-transform duration-300 transform hover:-translate-y-1 hover:shadow-xl border border-border post-card"
+    data-published-at={publishedAt}
+  >
+    <div class="relative">
+      <Image 
+        src={imageUrl} 
+        alt={title} 
+        width={imageWidth} 
+        height={imageHeight} 
+        format="webp" 
+        quality={80}
+        class="w-full h-48 object-cover"
+      />
+      <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+    </div>
+    <div class="p-6">
+      <h3 class="text-xl font-bold font-montserrat text-card-foreground mb-2 group-hover:text-accent transition-colors duration-300">{title}</h3>
+      {excerpt && (
+        <p class="font-work-sans text-card-foreground/80 mb-4 h-20 overflow-hidden">{excerpt}</p>
+      )}
+      <span class="font-semibold text-accent">Leia mais →</span>
+    </div>
+  </a>
+)}

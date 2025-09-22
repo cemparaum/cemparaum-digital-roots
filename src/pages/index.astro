@@ -1,4 +1,5 @@
 ---
+import { getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.tsx';
 import Hero from '../components/Hero.tsx';
@@ -6,18 +7,64 @@ import Services from '../components/Services.tsx';
 import About from '../components/About.tsx';
 import Contact from '../components/Contact.tsx';
 import Footer from '../components/Footer.tsx';
+import PostCard from '../components/PostCard.astro';
+import { STRAPI_API_URL } from '../config';
+import logoImage from '@/assets/logo.webp';
+import fullpackImage from '@/assets/fullpack.webp';
+import heroImage from '@/assets/hero-image.webp';
 
-const pageTitle = "100:1 Agência de Criação de Sites Profissionais - Serra ES";
+const STRAPI_API_TOKEN = import.meta.env.STRAPI_API_TOKEN;
+
+// Image Optimizations
+const optimizedLogo = await getImage({src: logoImage, width: 128, format: 'webp'});
+const optimizedFullpack = await getImage({src: fullpackImage, width: 1024, format: 'webp'});
+const heroImages = {
+    desktop: await getImage({src: heroImage, width: 1920, format: 'webp'}),
+    mobile: await getImage({src: heroImage, width: 768, format: 'webp'}),
+};
+
+// Fetch latest 3 articles
+const response = await fetch(`${STRAPI_API_URL}/api/articles?populate=*&pagination[limit]=3&sort=publishedAt:desc`, {
+  headers: {
+    'Authorization': `Bearer ${STRAPI_API_TOKEN}`
+  }
+});
+const postData = await response.json();
+const latestPosts = postData.data;
+
+const pageTitle = "Agência 100:1 | Criação de Sites Profissionais - Serra ES";
 const pageDescription = "Somos especialistas na criação de sites profissionais focados em posicionamento no Google (SEO). Construímos sites 100% personalizados.";
+const currentPath = Astro.url.pathname;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-	<Navigation client:load />
+	<Navigation client:load currentPath={currentPath} logoSrc={optimizedLogo.src} />
 	<main>
-		<Hero client:load />
-		<Services />
+		<Hero client:load heroImages={heroImages} />
+		<Services client:load fullpackImageSrc={optimizedFullpack.src} />
 		<About />
-		<Contact client:load />
+
+		<!-- Blog Section -->
+		<section id="blog" class="py-20 bg-background">
+			<div class="container mx-auto px-4">
+				<div class="text-center mb-12">
+					<h2 class="text-4xl font-bold font-montserrat text-title">Últimos Posts do Blog</h2>
+					<p class="text-lg text-foreground/80 mt-2">Fique por dentro das novidades e dicas do nosso time.</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{latestPosts && latestPosts.map((post: any) => (
+						<PostCard post={post} />
+					))}
+				</div>
+				<div class="text-center mt-12">
+					<a href="/blog" class="inline-block bg-accent text-accent-foreground font-bold py-3 px-8 rounded-lg hover:bg-accent/90 transition-colors duration-300">
+						Ver Todos os Posts
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<Contact client:visible />
 	</main>
-	<Footer />
+	<Footer logoSrc={optimizedLogo.src} />
 </Layout>

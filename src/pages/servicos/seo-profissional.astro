@@ -1,0 +1,73 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import { Check } from 'lucide-react';
+
+const service = {
+  title: "Consultoria SEO Profissional",
+  subtitle: "Colocando Sua Empresa no Topo do Google",
+  description: "SEO (Search Engine Optimization) é a arte de otimizar seu site para que ele apareça organicamente nas primeiras posições do Google, atraindo clientes que estão ativamente buscando por seus produtos ou serviços.",
+  imageUrl: "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  features: [
+    "Análise Completa de Palavras-Chave",
+    "Otimização Técnica On-Page",
+    "Estratégia de Link Building (Autoridade)",
+    "SEO Local para Negócios Físicos",
+    "Marketing de Conteúdo para Blog",
+    "Relatórios de Performance Claros",
+    "Monitoramento de Concorrência",
+    "Auditoria Completa do Site"
+  ],
+  cta: "Quero Estar no Topo do Google"
+}
+---
+
+<PageLayout 
+  title={`Agência 100:1 | ${service.title}`}
+  description={service.description}
+>
+  {/* Seção Hero do Serviço */}
+  <section class="py-20 bg-secondary bg-opacity-20">
+    <div class="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="order-2 lg:order-1">
+        <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-title mb-4">{service.title}</h1>
+        <h2 class="text-2xl md:text-3xl font-montserrat font-semibold text-accent mb-6">{service.subtitle}</h2>
+        <p class="text-lg text-foreground text-opacity-80 mb-8 font-work-sans">{service.description}</p>
+        <a href="#contato">
+          <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-7 text-lg hover-glow">
+            {service.cta}
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+        </a>
+      </div>
+      <div class="order-1 lg:order-2">
+        <img src={service.imageUrl} alt={service.title} class="rounded-2xl shadow-xl w-full h-auto object-cover aspect-[16/10]" />
+      </div>
+    </div>
+  </section>
+
+  {/* Seção de Features */}
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-4xl font-montserrat font-bold text-title mb-4">Nossa Metodologia de SEO</h2>
+        <p class="text-lg text-foreground text-opacity-80 font-work-sans">
+            Não se trata de truques, mas de uma estratégia sólida e contínua para construir a relevância e autoridade da sua marca no maior buscador do mundo.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {service.features.map(feature => (
+          <div class="bg-secondary bg-opacity-20 p-6 rounded-lg flex items-start space-x-4">
+            <div class="bg-primary text-primary-foreground p-2 rounded-full flex-shrink-0">
+              <Check className="w-5 h-5" />
+            </div>
+            <p class="font-work-sans text-foreground text-opacity-90">{feature}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</PageLayout>

@@ -27,6 +27,14 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <!-- Favicon -->
     <link rel="icon" type="image/webp" href={Logo.src} />
     
+    <!-- Font Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap">
+    </noscript>
+
     <!-- Astro View Transitions -->
     <ViewTransitions />
   </head>
@@ -38,9 +46,6 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 </html>
 
 <style is:global>
-  /* Importa as fontes do Google */
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap");
-
   /* Estilização da barra de rolagem */
   ::-webkit-scrollbar {
     width: 8px;

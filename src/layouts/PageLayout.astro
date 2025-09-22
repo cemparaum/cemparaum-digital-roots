@@ -1,0 +1,26 @@
+---
+import { getImage } from 'astro:assets';
+import Layout from "@/layouts/Layout.astro";
+import Navigation from "@/components/Navigation.tsx";
+import Contact from "@/components/Contact.tsx";
+import Footer from "@/components/Footer.tsx";
+import logoImage from '@/assets/logo.webp';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname;
+const optimizedLogo = await getImage({src: logoImage, width: 128, format: 'webp'});
+---
+
+<Layout title={title} description={description}>
+  <Navigation client:load currentPath={currentPath} logoSrc={optimizedLogo.src} />
+  <main>
+    <slot />
+  </main>
+  <Contact client:load />
+  <Footer logoSrc={optimizedLogo.src} />
+</Layout>
