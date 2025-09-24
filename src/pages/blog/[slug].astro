@@ -8,23 +8,53 @@ import { Markdown } from 'astro-remote';
 
 // This function tells Astro how to generate the static pages for each blog post.
 export async function getStaticPaths() {
-  // Correctly access the environment variable inside the function
   const STRAPI_API_TOKEN = import.meta.env.STRAPI_API_TOKEN;
 
-  const response = await fetch(`${STRAPI_API_URL}/api/articles?populate=*`, {
-    headers: {
-      'Authorization': `Bearer ${STRAPI_API_TOKEN}`,
-    },
-  });
-  const { data } = await response.json();
+  // If the token is missing during build, log an error and prevent the build from crashing.
+  if (!STRAPI_API_TOKEN) {
+    console.error("Strapi API token is missing. Please set STRAPI_API_TOKEN in your environment variables.");
+    return []; // Return an empty array to prevent a crash.
+  }
 
-  // The API response is an array of posts. We map over it to create the pages.
-  return data.map((post: any) => {
-    return {
-      params: { slug: post.slug },
-      props: { post }, // Pass the full post data to the component
-    };
-  });
+  try {
+    const response = await fetch(`${STRAPI_API_URL}/api/articles?populate=*`, {
+      headers: {
+        'Authorization': `Bearer ${STRAPI_API_TOKEN}`,
+      },
+    });
+
+    // If the API call is not successful, log the error and return an empty array.
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Failed to fetch posts from Strapi. Status: ${response.status}. Body: ${errorText}`);
+      return [];
+    }
+
+    const { data } = await response.json();
+
+    // If 'data' is not an array (e.g., API returned an error object), prevent a crash.
+    if (!Array.isArray(data)) {
+      console.error("The API response from Strapi did not contain a 'data' array. Response:", JSON.stringify(data, null, 2));
+      return [];
+    }
+
+    // The API response is an array of posts. We map over it to create the pages.
+    // We also handle the Strapi v4 data structure where content is in `attributes`.
+    return data.map((post: { attributes: any; }) => {
+      // Ensure the post has attributes and a slug before creating a path
+      if (!post.attributes || !post.attributes.slug) {
+        return null; // This will be filtered out later
+      }
+      return {
+        params: { slug: post.attributes.slug },
+        props: { post: post.attributes }, // Pass the attributes object to the component
+      };
+    }).filter(Boolean); // Filter out any null entries from posts without a slug
+  
+  } catch (error) {
+    console.error("An error occurred in getStaticPaths:", error);
+    return []; // Return an empty array on any other exception.
+  }
 }
 
 // Get the post data passed from getStaticPaths
@@ -41,13 +71,14 @@ if (richTextBlock) {
   content = richTextBlock.body;
 }
 
-const cover = post.cover;
+// Handle Strapi v4's nested data structure for relations (like cover image and author)
+const cover = post.cover?.data?.attributes;
 const coverImageUrl = cover?.url;
 const coverImageWidth = cover?.width;
 const coverImageHeight = cover?.height;
 
 const publishedAt = post.publishedAt;
-const authorName = post.author?.name;
+const authorName = post.author?.data?.attributes?.name;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
