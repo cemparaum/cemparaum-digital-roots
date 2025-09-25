@@ -12,7 +12,7 @@ const Footer = ({ logoSrc }: { logoSrc: string }) => {
 
     const socialLinks = [
         { icon: Instagram, href: "https://www.instagram.com/agenciacemparaum/", label: "Instagram" },
-        { icon: Facebook, href: "#", label: "Facebook" }, // Substituir pelo link real
+        { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61581129239277", label: "Facebook" },
     ];
 
     // Links corrigidos para navegação multi-página
