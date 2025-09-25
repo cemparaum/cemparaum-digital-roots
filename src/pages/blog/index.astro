@@ -4,37 +4,53 @@ import Navigation from '../../components/Navigation.tsx';
 import Footer from '../../components/Footer.tsx';
 import PostCard from '../../components/PostCard.astro';
 import { STRAPI_API_URL } from '../../config';
+import logo from '../../assets/logo.webp';
 
 const STRAPI_API_TOKEN = import.meta.env.STRAPI_API_TOKEN;
 const currentPath = Astro.url.pathname;
 
-// Fetch all articles
-const response = await fetch(`${STRAPI_API_URL}/api/articles?populate=*&sort=publishedAt:desc`, {
-  headers: {
-    'Authorization': `Bearer ${STRAPI_API_TOKEN}`
+let allPosts = [];
+let apiError = null;
+
+try {
+  const response = await fetch(`${STRAPI_API_URL}/api/articles?populate=*`, {
+    headers: {
+      'Authorization': `Bearer ${STRAPI_API_TOKEN}`
+    }
+  });
+  if (response.ok) {
+    const jsonData = await response.json();
+    // A resposta tem uma chave 'data' que contém o array de posts.
+    allPosts = jsonData.data || [];
+  } else {
+    apiError = `Falha na API: ${response.status} ${await response.text()}`;
   }
-});
-const postData = await response.json();
-const allPosts = postData.data;
+} catch (e) {
+  apiError = e.message;
+}
 
 const pageTitle = "Blog | Agência 100:1";
 const pageDescription = "Explore artigos, dicas e novidades sobre desenvolvimento web, SEO, e marketing digital.";
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <Navigation client:load currentPath={currentPath} />
+  <Navigation client:load currentPath={currentPath} logoSrc={logo.src} />
   <main class="bg-background text-foreground">
     <div class="container mx-auto px-4 py-16">
       <div class="text-center mb-12">
         <h1 class="text-5xl font-bold font-montserrat text-title">Nosso Blog</h1>
         <p class="text-xl text-foreground/80 mt-4">Artigos, dicas e novidades para impulsionar seu negócio digital.</p>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {allPosts && allPosts.map((post: any) => (
+        {allPosts.length > 0 ? allPosts.map((post) => (
           <PostCard post={post} />
-        ))}
+        )) : (
+          <p class="col-span-full text-center text-yellow-400">Nenhum post para exibir.</p>
+        )}
+         {apiError && <p class="col-span-full text-center text-red-500">Erro ao carregar posts: {apiError}</p>}
       </div>
     </div>
   </main>
-  <Footer />
+  <Footer client:load logoSrc={logo.src} />
 </Layout>

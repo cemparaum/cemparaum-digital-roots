@@ -13,13 +13,16 @@ const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: st
   const [isScrolled, setIsScrolled] = useState(false);
 
   const isHomePage = currentPath === "/";
+  // Lógica para determinar o destino do link de contato
+  const contactHref = currentPath.startsWith('/servicos') ? '#contato' : '/#contato';
 
   const menuItems: MenuItem[] = [
     { label: "Início", href: isHomePage ? "#inicio" : "/" },
     { label: "Serviços", href: isHomePage ? "#servicos" : "/#servicos", activePaths: ["/servicos"] },
     { label: "Sobre", href: isHomePage ? "#sobre" : "/#sobre" },
     { label: "Blog", href: "/blog", activePaths: ["/blog"] },
-    { label: "Contato", href: "#contato" },
+    // "Contato" agora usa o href dinâmico
+    { label: "Contato", href: contactHref },
   ];
 
   useEffect(() => {
@@ -38,7 +41,16 @@ const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: st
     setIsOpen(false);
   };
 
-  const handleCtaClick = (e: React.MouseEvent) => handleScrollClick(e, "#contato");
+  // Ação do botão de CTA agora é dinâmica
+  const handleCtaClick = (e: React.MouseEvent) => {
+    if (contactHref === '#contato') {
+      handleScrollClick(e, '#contato');
+    } else {
+      e.preventDefault();
+      window.location.href = contactHref;
+    }
+    setIsOpen(false);
+  };
 
   return (
     <header

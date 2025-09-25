@@ -3,125 +3,91 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.tsx';
 import Footer from '../../components/Footer.tsx';
+import CtaBlog from '../../components/CtaBlog.astro';
 import { STRAPI_API_URL } from '../../config';
 import { Markdown } from 'astro-remote';
+import logo from '../../assets/logo.webp';
 
-// This function tells Astro how to generate the static pages for each blog post.
+const currentPath = Astro.url.pathname;
+
 export async function getStaticPaths() {
   const STRAPI_API_TOKEN = import.meta.env.STRAPI_API_TOKEN;
+  const response = await fetch(`${STRAPI_API_URL}/api/articles?populate=*`, {
+    headers: {
+      'Authorization': `Bearer ${STRAPI_API_TOKEN}`,
+    },
+  });
+  const { data } = await response.json();
+  const posts = Array.isArray(data) ? data : [];
 
-  // If the token is missing during build, log an error and prevent the build from crashing.
-  if (!STRAPI_API_TOKEN) {
-    console.error("Strapi API token is missing. Please set STRAPI_API_TOKEN in your environment variables.");
-    return []; // Return an empty array to prevent a crash.
-  }
-
-  try {
-    const response = await fetch(`${STRAPI_API_URL}/api/articles?populate=*`, {
-      headers: {
-        'Authorization': `Bearer ${STRAPI_API_TOKEN}`,
-      },
-    });
-
-    // If the API call is not successful, log the error and return an empty array.
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`Failed to fetch posts from Strapi. Status: ${response.status}. Body: ${errorText}`);
-      return [];
-    }
-
-    const { data } = await response.json();
-
-    // If 'data' is not an array (e.g., API returned an error object), prevent a crash.
-    if (!Array.isArray(data)) {
-      console.error("The API response from Strapi did not contain a 'data' array. Response:", JSON.stringify(data, null, 2));
-      return [];
-    }
-
-    // The API response is an array of posts. We map over it to create the pages.
-    // We also handle the Strapi v4 data structure where content is in `attributes`.
-    return data.map((post: { attributes: any; }) => {
-      // Ensure the post has attributes and a slug before creating a path
-      if (!post.attributes || !post.attributes.slug) {
-        return null; // This will be filtered out later
-      }
-      return {
-        params: { slug: post.attributes.slug },
-        props: { post: post.attributes }, // Pass the attributes object to the component
-      };
-    }).filter(Boolean); // Filter out any null entries from posts without a slug
-  
-  } catch (error) {
-    console.error("An error occurred in getStaticPaths:", error);
-    return []; // Return an empty array on any other exception.
-  }
+  return posts.map((post) => {
+    if (!post || !post.slug) return null;
+    return {
+      params: { slug: post.slug },
+      props: { post: post },
+    };
+  }).filter(Boolean);
 }
 
-// Get the post data passed from getStaticPaths
 const { post } = Astro.props;
-const currentPath = Astro.url.pathname;
 
 const pageTitle = `${post.title} | Blog 100:1`;
 const pageDescription = post.description;
 
-// Extract content from the rich text block
 let content = "";
 const richTextBlock = post.blocks?.find(block => block.__component === 'shared.rich-text');
 if (richTextBlock) {
   content = richTextBlock.body;
 }
 
-// Handle Strapi v4's nested data structure for relations (like cover image and author)
-const cover = post.cover?.data?.attributes;
-const coverImageUrl = cover?.url;
-const coverImageWidth = cover?.width;
-const coverImageHeight = cover?.height;
+const coverImageUrl = post.cover?.formats?.large?.url || post.cover?.url;
+const coverImageWidth = post.cover?.formats?.large?.width || post.cover?.width;
+const coverImageHeight = post.cover?.formats?.large?.height || post.cover?.height;
 
 const publishedAt = post.publishedAt;
-const authorName = post.author?.data?.attributes?.name;
+const authorName = post.author?.name;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <Navigation client:load currentPath={currentPath} />
-  <main class="bg-background">
-    <div class="container mx-auto px-4 py-16">
-      <div class="max-w-4xl mx-auto">
-        <a href="/blog" class="inline-block text-accent mb-8 hover:underline font-semibold">
-          &larr; Voltar para o Blog
-        </a>
-
-        <article class="bg-card p-8 md:p-12 rounded-lg shadow-lg border border-border">
-          <h1 class="text-3xl md:text-5xl font-bold font-montserrat text-card-foreground mb-4">{post.title}</h1>
-          
-          {(publishedAt || authorName) && (
-            <div class="flex flex-wrap items-center text-card-foreground/70 mb-8 text-sm">
-              {publishedAt && (
-                <span>{new Date(publishedAt).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-              )}
-              {publishedAt && authorName && <span class="mx-2">•</span>}
-              {authorName && <span>Por {authorName}</span>}
-            </div>
+  <Navigation client:load currentPath={currentPath} logoSrc={logo.src} />
+  <main class="bg-background text-foreground">
+    <article class="max-w-4xl mx-auto px-4 py-16">
+      <a href="/blog" class="inline-block text-accent mb-8 hover:underline font-semibold">
+        &larr; Voltar para o Blog
+      </a>
+      
+      <h1 class="text-4xl md:text-5xl font-bold font-montserrat text-title mb-4">{post.title}</h1>
+      
+      {(publishedAt || authorName) && (
+        <div class="flex flex-wrap items-center text-foreground/70 mb-8 text-base">
+          {publishedAt && (
+            <span>{new Date(publishedAt).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           )}
+          {publishedAt && authorName && <span class="mx-2">•</span>}
+          {authorName && <span>Por {authorName}</span>}
+        </div>
+      )}
 
-          {coverImageUrl && coverImageWidth && coverImageHeight && (
-            <Image 
-              src={coverImageUrl} 
-              alt={post.title} 
-              width={coverImageWidth} 
-              height={coverImageHeight}
-              format="webp" 
-              quality={80}
-              class="w-full h-auto object-cover rounded-lg mb-8"
-            />
-          )}
+      {coverImageUrl && coverImageWidth && coverImageHeight && (
+        <Image 
+          src={coverImageUrl} 
+          alt={post.title}
+          width={coverImageWidth} 
+          height={coverImageHeight}
+          format="webp" 
+          quality={80}
+          class="w-full max-h-[500px] object-cover rounded-lg mb-8 shadow-lg"
+        />
+      )}
 
-          <div class="prose prose-lg max-w-none prose-p:text-card-foreground/90 prose-headings:text-card-foreground prose-strong:text-card-foreground prose-a:text-accent prose-li:text-card-foreground/90 prose-blockquote:text-card-foreground/70">
-            {content && <Markdown content={content} />}
-          </div>
-        </article>
-        
+      <div class="prose prose-lg max-w-none prose-headings:text-title prose-p:text-foreground/90 prose-strong:text-title prose-a:text-accent prose-li:text-foreground/90 prose-blockquote:border-accent prose-blockquote:text-foreground/80">
+        {content && <Markdown content={content} />}
       </div>
-    </div>
+
+    </article>
+
+    <CtaBlog />
+
   </main>
-  <Footer />
+  <Footer client:load logoSrc={logo.src} />
 </Layout>
