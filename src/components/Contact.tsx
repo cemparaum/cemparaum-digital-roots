@@ -27,10 +27,10 @@ const Contact = () => {
   const [whatsappUrl, setWhatsappUrl] = useState('');
 
   const contactInfo = [
-    { icon: Phone, title: "Telefone & WhatsApp", info: "(27) 99527-1995" },
-    { icon: Mail, title: "E-mail", info: "cemparaum@gmail.com" },
-    { icon: MapPin, title: "Endereço", info: "Av. Eucalipto 764, Vista da Serra 2 - Serra/ES" },
-    { icon: Clock, title: "Horário de Atendimento", info: "Segunda a Sexta: 8h às 18h" },
+    { icon: Phone, title: "Telefone & WhatsApp", info: "(27) 99527-1995", href: "https://wa.me/5527995271995", eventLabel: "Contact Info - Phone & WhatsApp" },
+    { icon: Mail, title: "E-mail", info: "cemparaum@gmail.com", href: "mailto:cemparaum@gmail.com", eventLabel: "Contact Info - Email" },
+    { icon: MapPin, title: "Endereço", info: "Av. Eucalipto 764, Vista da Serra 2 - Serra/ES", href: "https://www.google.com/maps/search/Av.+Eucalipto+764,+Vista+da+Serra+2+-+Serra/ES", eventLabel: "Contact Info - Address" },
+    { icon: Clock, title: "Horário de Atendimento", info: "Segunda a Sexta: 8h às 18h", href: "#", eventLabel: "Contact Info - Opening Hours" }, // No direct link for opening hours
   ];
 
   const socialLinks = [
@@ -47,12 +47,16 @@ const Contact = () => {
 
     const formData = { name, company, email, phone, service, message };
 
+    // Track the form submission attempt
+    trackClick('Contact Form', 'Attempt Submit', 'Contact Form Submission');
+
     const { error } = await supabase.from('contacts').insert([formData]);
 
     if (error) {
       console.error('Supabase Error:', error);
       setStatus('error');
       setFeedbackMessage(`Erro ao salvar seus dados: ${error.message}. Por favor, tente novamente.`);
+      trackClick('Contact Form', 'Submission Error', error.message);
     } else {
       setStatus('success');
       trackLeadGeneration({ name, email, phone, company, service });
@@ -98,7 +102,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg"
-                  onClick={() => trackClick('Contact Form', 'Click WhatsApp CTA', whatsappUrl)}
+                  onClick={() => trackClick('Contact Form', 'Click WhatsApp CTA - After Submit', whatsappUrl)}
                 >
                   <MessageCircle className="mr-3 w-6 h-6" />
                   Chamar no WhatsApp
@@ -164,7 +168,19 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-title font-montserrat mb-1">{item.title}</h4>
-                      <p className="text-foreground/80 font-work-sans">{item.info}</p>
+                      {item.href && item.href !== "#" ? (
+                        <a 
+                          href={item.href}
+                          target={item.href.startsWith("http") ? "_blank" : "_self"}
+                          rel={item.href.startsWith("http") ? "noopener noreferrer" : ""}
+                          className="text-foreground/80 font-work-sans hover:text-accent transition-colors"
+                          onClick={() => trackClick("Contact Info", `Click - ${item.eventLabel}`, item.href)}
+                        >
+                          {item.info}
+                        </a>
+                      ) : (
+                        <p className="text-foreground/80 font-work-sans">{item.info}</p>
+                      )}
                     </div>
                   </div>
                 </div>

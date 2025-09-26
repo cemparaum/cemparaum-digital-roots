@@ -1,4 +1,7 @@
 import { Instagram, Facebook, Heart, Phone, Mail, MapPin } from 'lucide-react';
+import { trackClick } from "@/utils/dataLayer";
+
+const removeHash = (path: string) => path.startsWith("#") ? path.substring(1) : path;
 
 const Footer = ({ logoSrc }: { logoSrc: string }) => {
 
@@ -8,6 +11,7 @@ const Footer = ({ logoSrc }: { logoSrc: string }) => {
         if (element) {
             element.scrollIntoView({ behavior: "smooth" });
         }
+        trackClick("Footer", "Click - Contato", removeHash(e.currentTarget.href));
     };
 
     const socialLinks = [
@@ -38,7 +42,12 @@ const Footer = ({ logoSrc }: { logoSrc: string }) => {
                     
                     {/* Col 1: Logo e Social (Logo agora é um link) */}
                     <div className="flex flex-col items-center text-center md:items-start md:text-left">
-                        <a href="/" aria-label="100:1 Cem para Um - Voltar para a página inicial" className="mb-4 flex items-center space-x-3">
+                        <a 
+                            href="/" 
+                            aria-label="100:1 Cem para Um - Voltar para a página inicial" 
+                            className="mb-4 flex items-center space-x-3"
+                            onClick={() => trackClick("Footer", "Click - Logo", "/")}
+                        >
                             <img src={logoSrc} alt="" className="h-12 w-auto" width="48" height="48" />
                             <div aria-hidden="true">
                                 <div className="font-montserrat font-bold text-2xl text-title">100:1</div>
@@ -57,6 +66,7 @@ const Footer = ({ logoSrc }: { logoSrc: string }) => {
                                     rel="noopener noreferrer" 
                                     aria-label={link.label}
                                     className="text-muted-foreground hover:text-accent transition-colors"
+                                    onClick={() => trackClick("Footer", `Click - ${link.label} Social`, link.href)}
                                 >
                                     <link.icon className="w-6 h-6" />
                                 </a>
@@ -72,7 +82,7 @@ const Footer = ({ logoSrc }: { logoSrc: string }) => {
                                 <li key={link.label}>
                                     <a 
                                         href={link.href}
-                                        onClick={link.href === '#contato' ? handleContactClick : undefined}
+                                        onClick={link.href === '#contato' ? handleContactClick : () => trackClick("Footer", `Click - ${link.label} Quick Link`, removeHash(link.href))}
                                         className="text-muted-foreground hover:text-accent transition-colors text-sm cursor-pointer"
                                     >
                                         {link.label}
@@ -91,6 +101,7 @@ const Footer = ({ logoSrc }: { logoSrc: string }) => {
                                     <a 
                                         href={link.href}
                                         className="text-muted-foreground hover:text-accent transition-colors text-sm cursor-pointer"
+                                        onClick={() => trackClick("Footer", `Click - ${link.label} Service Link`, link.href)}
                                     >
                                         {link.label}
                                     </a>
@@ -109,11 +120,21 @@ const Footer = ({ logoSrc }: { logoSrc: string }) => {
                             </li>
                             <li className="flex items-start">
                                 <Mail className="w-4 h-4 mr-3 mt-1 text-accent flex-shrink-0" />
-                                <a href="mailto:cemparaum@gmail.com" className="text-muted-foreground hover:text-accent transition-colors">cemparaum@gmail.com</a>
+                                <a 
+                                    href="mailto:cemparaum@gmail.com" 
+                                    className="text-muted-foreground hover:text-accent transition-colors"
+                                    onClick={() => trackClick("Footer", "Click - Email", "mailto:cemparaum@gmail.com")}
+                                >cemparaum@gmail.com</a>
                             </li>
                             <li className="flex items-start">
                                 <Phone className="w-4 h-4 mr-3 mt-1 text-accent flex-shrink-0" />
-                                <a href="https://wa.me/5527995271995" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-accent transition-colors">+55 (27) 99527-1995</a>
+                                <a 
+                                    href="https://wa.me/5527995271995" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="text-muted-foreground hover:text-accent transition-colors"
+                                    onClick={() => trackClick("Footer", "Click - WhatsApp", "https://wa.me/5527995271995")}
+                                >+55 (27) 99527-1995</a>
                             </li>
                         </ul>
                     </div>

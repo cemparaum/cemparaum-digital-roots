@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { trackClick } from "@/utils/dataLayer"; // Import trackClick
 
 interface MenuItem {
   label: string;
   href: string;
   activePaths?: string[];
 }
+
+const removeHash = (path: string) => path.startsWith("#") ? path.substring(1) : path;
 
 const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +34,7 @@ const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: st
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleScrollClick = (e: React.MouseEvent, href: string) => {
+  const handleScrollClick = (e: React.MouseEvent, href: string, label: string) => {
     e.preventDefault();
     const targetId = href === "#inicio" ? "body" : href;
     const targetElement = document.querySelector(targetId);
@@ -39,15 +42,17 @@ const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: st
       targetElement.scrollIntoView({ behavior: "smooth" });
     }
     setIsOpen(false);
+    trackClick("Navigation", `Click - ${label}`, removeHash(href));
   };
 
   // Ação do botão de CTA agora é dinâmica
   const handleCtaClick = (e: React.MouseEvent) => {
     if (contactHref === '#contato') {
-      handleScrollClick(e, '#contato');
+      handleScrollClick(e, '#contato', 'Começar Meu Projeto - CTA');
     } else {
       e.preventDefault();
       window.location.href = contactHref;
+      trackClick("Navigation", "Click - Começar Meu Projeto - CTA", removeHash(contactHref));
     }
     setIsOpen(false);
   };
@@ -61,7 +66,7 @@ const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: st
       <nav className="container mx-auto px-4 relative">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center h-full py-2 space-x-3" aria-label="100:1 Cem para Um - Voltar para a página inicial">
+          <a href="/" className="flex items-center h-full py-2 space-x-3" aria-label="100:1 Cem para Um - Voltar para a página inicial" onClick={() => trackClick("Navigation", "Click - Logo", "/")}>
             <img src={logoSrc} alt="" className="h-full w-auto" width="64" height="64" />
             <div className="text-left" aria-hidden="true">
               <div className="text-title font-montserrat font-bold text-2xl">100:1</div>
@@ -77,13 +82,13 @@ const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: st
 
               if (item.href.startsWith("#")) {
                 return (
-                  <button key={item.label} onClick={(e) => handleScrollClick(e, item.href)} className={className}>
+                  <button key={item.label} onClick={(e) => handleScrollClick(e, item.href, item.label)} className={className}>
                     {item.label}
                   </button>
                 );
               }
               return (
-                <a key={item.label} href={item.href} className={className}>
+                <a key={item.label} href={item.href} className={className} onClick={() => trackClick("Navigation", `Click - ${item.label}`, removeHash(item.href))}>
                   {item.label}
                 </a>
               );
@@ -109,13 +114,13 @@ const Navigation = ({ currentPath, logoSrc }: { currentPath: string, logoSrc: st
                  const className = "block w-full text-left py-3 px-4 rounded-md text-lg text-foreground/80 hover:text-accent hover:bg-white/5 transition-colors font-work-sans font-medium";
                  if (item.href.startsWith("#")) {
                    return (
-                    <button key={item.label} onClick={(e) => handleScrollClick(e, item.href)} className={className}>
+                    <button key={item.label} onClick={(e) => handleScrollClick(e, item.href, item.label)} className={className}>
                       {item.label}
                     </button>
                    );
                  }
                  return (
-                   <a key={item.label} href={item.href} onClick={() => setIsOpen(false)} className={className}>
+                   <a key={item.label} href={item.href} onClick={() => { setIsOpen(false); trackClick("Navigation", `Click - ${item.label} (Mobile)`, removeHash(item.href)); }} className={className}>
                     {item.label}
                    </a>
                  );
