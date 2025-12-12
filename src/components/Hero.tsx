@@ -48,6 +48,8 @@ const Hero = ({ heroImages }: { heroImages: HeroImages }) => {
               src={heroImages.desktop.src}
               alt="Agência de marketing digital 100:1 em Serra ES - Criação de sites, SEO e Google Meu Negócio"
               className="w-full h-full object-cover"
+              loading="eager"
+              fetchpriority="high"
             />
         </picture>
         <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>

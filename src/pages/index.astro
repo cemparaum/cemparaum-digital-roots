@@ -17,11 +17,10 @@ const STRAPI_API_TOKEN = import.meta.env.STRAPI_API_TOKEN;
 
 // Image Optimizations
 const optimizedLogo = await getImage({src: logoImage, width: 128, format: 'webp'});
-// Adjusted width for fullpack image based on rendered dimensions (700x700)
 const optimizedFullpack = await getImage({src: fullpackImage, width: 700, format: 'webp'});
 const heroImages = {
-    desktop: await getImage({src: heroImage, width: 1920, format: 'webp'}),
-    mobile: await getImage({src: heroImage, width: 768, format: 'webp'}),
+    desktop: await getImage({src: heroImage, width: 1920, format: 'webp', quality: 80}),
+    mobile: await getImage({src: heroImage, width: 768, format: 'webp', quality: 80}),
 };
 
 // Fetch latest 3 articles
@@ -42,7 +41,7 @@ const currentPath = Astro.url.pathname;
 	<Navigation client:load currentPath={currentPath} logoSrc={optimizedLogo.src} />
 	<main>
 		<Hero client:load heroImages={heroImages} />
-		<Services client:load fullpackImageSrc={optimizedFullpack.src} />
+		<Services client:visible fullpackImageSrc={optimizedFullpack.src} />
 		<About />
 
 		<!-- Blog Section -->
@@ -67,5 +66,5 @@ const currentPath = Astro.url.pathname;
 
 		<Contact client:visible />
 	</main>
-	<Footer logoSrc={optimizedLogo.src} />
+	<Footer client:visible logoSrc={optimizedLogo.src} />
 </Layout>

@@ -20,13 +20,17 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Google Tag Manager -->
-    <script defer>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5R58DLZL');</script>
-    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager DataLayer -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GTM-5R58DLZL');
+    </script>
+
+    <!-- Google Tag Manager Script (Partytown) -->
+    <script type="text/partytown" src="https://www.googletagmanager.com/gtm.js?id=GTM-5R58DLZL"></script>
+
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
