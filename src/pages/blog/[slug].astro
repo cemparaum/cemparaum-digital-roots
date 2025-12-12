@@ -68,7 +68,7 @@ const authorName = post.author?.name;
         </div>
       )}
 
-      {coverImageUrl && coverImageWidth && coverImageHei
+      {(coverImageUrl && coverImageWidth && coverImageHeight) && (
         <Image 
           src={coverImageUrl} 
           alt={post.title}
