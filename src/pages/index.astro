@@ -17,7 +17,8 @@ const STRAPI_API_TOKEN = import.meta.env.STRAPI_API_TOKEN;
 
 // Image Optimizations
 const optimizedLogo = await getImage({src: logoImage, width: 128, format: 'webp'});
-const optimizedFullpack = await getImage({src: fullpackImage, width: 1024, format: 'webp'});
+// Adjusted width for fullpack image based on rendered dimensions (700x700)
+const optimizedFullpack = await getImage({src: fullpackImage, width: 700, format: 'webp'});
 const heroImages = {
     desktop: await getImage({src: heroImage, width: 1920, format: 'webp'}),
     mobile: await getImage({src: heroImage, width: 768, format: 'webp'}),
